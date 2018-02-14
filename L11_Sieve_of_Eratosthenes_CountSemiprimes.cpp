@@ -185,5 +185,45 @@ vector<int> solution2(int N, vector<int> &P, vector<int> &Q) {
 // 소수를 구하고, 그걸 가지고 semiprime을 구하면 시간이 오래 걸릴수 밖에 없음. 
 // 해답을 보고 이해를 못해서 꼬박 하루가 지난 다음에야 문제의 요지를 이해함. 
 
+//https://app.codility.com/demo/results/trainingXCJC8G-RMW/
+bool isSemiPrime(int num)
+{
+	int count = 0;
+	int i = 2;
+	while (i*i <= num && count < 3)
+	{
+		if (num%i == 0)
+		{
+			count++;
+			num = num / i;
+		}
+		else
+			i++;
+	}
+	if (num > 1)
+		count++;
+	return count == 2;
+}
 
+
+vector<int> solution3(int N, vector<int> &P, vector<int> &Q) {
+	// write your code in C++14 (g++ 6.2.0)
+
+	vector<int> result;
+
+	for (int i = 0; i < P.size(); i++)
+	{
+		int count = 0;
+		for (int j = P[i]; j <= Q[i]; j++)
+		{
+			if (isSemiPrime(j))
+				count++;
+		}
+		result.push_back(count);
+	}
+	return result;
+}
+//////////////////////////////////////////////
+// 66%
+// semiPrime 찾는걸 더 줄여야 됨. 
 

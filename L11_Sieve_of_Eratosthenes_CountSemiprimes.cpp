@@ -227,3 +227,35 @@ vector<int> solution3(int N, vector<int> &P, vector<int> &Q) {
 // 66%
 // semiPrime 찾는걸 더 줄여야 됨. 
 
+
+//https://app.codility.com/demo/results/trainingXWM4NP-7Z6/
+vector<int> solution_final(int N, vector<int> &P, vector<int> &Q) {
+	// write your code in C++14 (g++ 6.2.0)
+
+	vector<int> result;
+	vector<int> semiSumPrimeCounter(N + 1, 0);
+
+
+	int count = 0;
+	for (int i = 2; i <= N; i++)
+	{
+		if (isSemiPrime(i))
+		{
+			count++;
+		}
+		semiSumPrimeCounter[i] = count;
+	}
+
+	for (int i = 0; i < P.size(); i++)
+	{
+		int count = semiSumPrimeCounter[Q[i]] - semiSumPrimeCounter[P[i] - 1];
+
+		result.push_back(count);
+	}
+	return result;
+}
+
+
+//////////////////////////////////////////////
+// 100%
+// N까지 semiPrime 등장 갯수를 미리 저장해둔다. 

@@ -136,4 +136,54 @@ vector<int> solution(int N, vector<int> &P, vector<int> &Q) {
 // 일단 연산 속도... 줄일 방안을 생각하자
 
 
+vector<int> getPrimeFact(int num)
+{
+	vector<int> result;
+	for (int i = 2; i <= num; i++)
+	{
+		while (1) {
+			if (num%i == 0)
+			{
+				result.push_back(num%i);
+				num = num / i;
+			}
+			else
+				break;
+
+		}
+	}
+	return result;
+}
+
+vector<int> solution2(int N, vector<int> &P, vector<int> &Q) {
+	// write your code in C++14 (g++ 6.2.0)
+
+	vector<int> result;
+
+	auto primeFact = getPrimeFact(26);
+
+	for (int i = 0; i < P.size(); i++)
+	{
+		int count = 0;
+		for (int j = P[i]; j <= Q[i]; j++)
+		{
+			auto primeFact = getPrimeFact(j);
+
+			if (primeFact.size() == 2)
+				count++;
+		}
+		result.push_back(count);
+	}
+	return result;
+}
+
+//////////////////////////////////////////////
+// 55%
+// 문제를 완전히 잘못 생각했음 ㅠ.ㅠ
+// 에라토스테네스의 체를 응용한 소인수분해 알고리즘을 만들라는것이 이문제의 주제였음
+// semiprime 의 경우는 소인수 분해 하면 중복을 허용해서 나오는 숫자가 2 고정이라는것이 문제의 핵심. 
+// 소수를 구하고, 그걸 가지고 semiprime을 구하면 시간이 오래 걸릴수 밖에 없음. 
+// 해답을 보고 이해를 못해서 꼬박 하루가 지난 다음에야 문제의 요지를 이해함. 
+
+
 
